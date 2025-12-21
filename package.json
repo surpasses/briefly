@@ -1,0 +1,12 @@
+{
+  "name": "briefly",
+  "version": "1.0.0",
+  "description": "Daily article digest service",
+  "private": true,
+  "scripts": {
+    "dev": "cd frontend && npm run dev",
+    "build": "cd frontend && npm run build",
+    "install:all": "cd frontend && npm install"
+  }
+}
+
