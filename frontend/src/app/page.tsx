@@ -16,7 +16,7 @@ export default function Home() {
             Briefly
           </h1>
           <p className="text-xl text-slate-600">
-            Your daily digest of news articles
+            Your daily digest of news articles.
           </p>
         </div>
 
