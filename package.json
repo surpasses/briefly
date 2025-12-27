@@ -18,6 +18,7 @@
     "scripts": {
     "db:up": "docker compose -f db/docker-compose.yml up -d",
     "db:down": "docker compose -f db/docker-compose.yml down",
-    "db:migrate": "npx dotenv -e .env -- node-pg-migrate up --migrations-dir db/migrations"
+    "db:migrate": "npx dotenv -e .env -- node-pg-migrate up --migrations-dir db/migrations",
+    "db:seed" : "node -r dotenv/config db/seed/seed.js"
   }
 }

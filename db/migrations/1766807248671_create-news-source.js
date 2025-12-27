@@ -3,7 +3,7 @@ exports.shorthands = undefined;
 exports.up = (pgm) => {
   pgm.sql(`
         CREATE TABLE news_sources (
-        id BIGSERIAL PRIMARY KEY,
+        id BIGINT PRIMARY KEY,
         name VARCHAR NOT NULL,
         source VARCHAR NOT NULL
         );
