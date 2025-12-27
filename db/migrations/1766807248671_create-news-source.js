@@ -5,7 +5,7 @@ exports.up = (pgm) => {
         CREATE TABLE news_sources (
         id BIGSERIAL PRIMARY KEY,
         name VARCHAR NOT NULL,
-        link VARCHAR NOT NULL
+        source VARCHAR NOT NULL
         );
         `);
 };
