@@ -7,6 +7,17 @@
     "dev": "cd frontend && npm run dev",
     "build": "cd frontend && npm run build",
     "install:all": "cd frontend && npm install"
+  },
+  "dependencies": {
+    "dotenv": "^17.2.3",
+    "dotenv-cli": "^11.0.0"
+  },
+  "devDependencies": {
+    "node-pg-migrate": "^8.0.4"
+  },
+    "scripts": {
+    "db:up": "docker compose -f db/docker-compose.yml up -d",
+    "db:down": "docker compose -f db/docker-compose.yml down",
+    "db:migrate": "npx dotenv -e .env -- node-pg-migrate up --migrations-dir db/migrations"
   }
 }
-

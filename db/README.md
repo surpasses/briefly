@@ -28,7 +28,7 @@ Stores supported news outlets available for subscription.
 | Column | Type | Description |
 |------|------|------------|
 | `id` | `bigserial` | Primary key. Uniquely identifies a news source. |
-| `name` | `varchar` | Rreadable name of the news outlet (e.g. news.com.au). |
+| `name` | `varchar` | Readable name of the news outlet (e.g. news.com.au). |
 | `link` | `varchar` | Base URL or RSS feed used to fetch articles from the outlet (subject to change depending on API used for news gathering). |
 
 ---

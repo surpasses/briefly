@@ -1,0 +1,10 @@
+services:
+  postgres:
+    image: postgres:16
+    container_name: news_postgres
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: app
+      POSTGRES_PASSWORD: app_password
+      POSTGRES_DB: news_notifier

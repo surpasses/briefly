@@ -13,10 +13,10 @@ export default function Home() {
         {/* Header */}
         <div className="text-center mb-12">
           <h1 className="text-6xl font-bold text-slate-900 mb-3 tracking-tight">
-            Briefly
+            Briefly.
           </h1>
           <p className="text-xl text-slate-600">
-            Your daily digest of news articles.
+            Your daily digest of news articles
           </p>
         </div>
 
