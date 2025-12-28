@@ -5,11 +5,16 @@ import { useState } from 'react'
 interface ContactFormProps {
   deliveryMethod: 'email' | 'sms'
   onDeliveryMethodChange: (method: 'email' | 'sms') => void
+  destination: string
+  onDestinationChange: (value: string) => void
 }
 
-export default function ContactForm({ deliveryMethod, onDeliveryMethodChange }: ContactFormProps) {
-  const [destination, setDestination] = useState('')
-
+export default function ContactForm({
+  deliveryMethod, 
+  onDeliveryMethodChange,
+  destination,
+  onDestinationChange
+}: ContactFormProps) {
   return (
     <div className="space-y-6">
       <div>
@@ -59,7 +64,7 @@ export default function ContactForm({ deliveryMethod, onDeliveryMethodChange }: 
               id="email"
               value={destination}
               onChange={(e) => {
-                setDestination(e.target.value)
+                onDestinationChange(e.target.value);
               }}
               placeholder="you@example.com"
               className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition-all"
@@ -74,11 +79,11 @@ export default function ContactForm({ deliveryMethod, onDeliveryMethodChange }: 
               Phone Number
             </label>
             <input
-              type="sms"
+              type="tel"
               id="sms"
               value={destination}
               onChange={(e) => {
-                setDestination(e.target.value);
+                onDestinationChange(e.target.value);
               }
                 
               }

@@ -5,28 +5,39 @@ import { useState } from 'react'
 interface NewsSource {
   id: string
   name: string
-  url: string
 }
 
+interface NewsSourceProps {
+  selectedSource: string | null
+  onSelectedSourceChange: (id: string | null) => void
+  onSubscribe: () => void
+}
+
+// Add new sources here
 const newsSources: NewsSource[] = [
   {
-    id: 'news-com-au',
+    id: 'news.com.au',
     name: 'news.com.au',
-    url: 'https://www.news.com.au',
   },
   {
-    id: 'abc-net-au',
+    id: 'abc',
     name: 'abc.net.au',
-    url: 'https://www.abc.net.au',
+  },
+  {
+    id: 'smh',
+    name: 'smh.com.au',
   },
 ]
 
-export default function ArticleChecklist() {
-  const [selectedSource, setSelectedSource] = useState<string | null>(null)
+export default function ArticleChecklist({
+  selectedSource,
+  onSelectedSourceChange,
+  onSubscribe
+}: NewsSourceProps) {
 
   const handleSourceChange = (sourceId: string) => {
     // If clicking the same source, deselect it; otherwise select the new one
-    setSelectedSource(selectedSource === sourceId ? null : sourceId)
+    onSelectedSourceChange(selectedSource === sourceId ? null : sourceId)
   }
 
   return (
@@ -86,7 +97,10 @@ export default function ArticleChecklist() {
 
       {selectedSource && (
         <div className="mt-6 pt-6 border-t border-slate-200">
-          <button className="w-full bg-primary-600 hover:bg-primary-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors shadow-md hover:shadow-lg">
+          <button 
+            className="w-full bg-primary-600 hover:bg-primary-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors shadow-md hover:shadow-lg"
+            onClick={onSubscribe}
+          >
             Subscribe
           </button>
         </div>
