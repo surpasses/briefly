@@ -5,7 +5,7 @@ import ArticleChecklist from '@/components/ArticleChecklist'
 import ContactForm from '@/components/ContactForm'
 
 export default function Home() {
-  const [deliveryMethod, setDeliveryMethod] = useState<'email' | 'phone'>('email')
+  const [deliveryMethod, setDeliveryMethod] = useState<'email' | 'sms'>('email')
 
   return (
     <main className="min-h-screen py-12 px-4 sm:px-6 lg:px-8">
@@ -14,7 +14,7 @@ export default function Home() {
         <div className="text-center mb-12">
           <h1 className="text-6xl font-bold text-slate-900 mb-3 tracking-tight">
             Briefly.
-          </h1>
+          </h1> 
           <p className="text-xl text-slate-600">
             Your daily digest of news articles
           </p>

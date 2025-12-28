@@ -3,13 +3,12 @@
 import { useState } from 'react'
 
 interface ContactFormProps {
-  deliveryMethod: 'email' | 'phone'
-  onDeliveryMethodChange: (method: 'email' | 'phone') => void
+  deliveryMethod: 'email' | 'sms'
+  onDeliveryMethodChange: (method: 'email' | 'sms') => void
 }
 
 export default function ContactForm({ deliveryMethod, onDeliveryMethodChange }: ContactFormProps) {
-  const [email, setEmail] = useState('')
-  const [phone, setPhone] = useState('')
+  const [destination, setDestination] = useState('')
 
   return (
     <div className="space-y-6">
@@ -26,7 +25,7 @@ export default function ContactForm({ deliveryMethod, onDeliveryMethodChange }: 
               name="deliveryMethod"
               value="email"
               checked={deliveryMethod === 'email'}
-              onChange={(e) => onDeliveryMethodChange(e.target.value as 'email' | 'phone')}
+              onChange={(e) => onDeliveryMethodChange(e.target.value as 'email' | 'sms')}
               className="w-5 h-5 text-primary-600 focus:ring-primary-500 focus:ring-2 border-gray-300"
             />
             <span className="ml-3 text-slate-700 font-medium group-hover:text-slate-900">
@@ -38,9 +37,9 @@ export default function ContactForm({ deliveryMethod, onDeliveryMethodChange }: 
             <input
               type="radio"
               name="deliveryMethod"
-              value="phone"
-              checked={deliveryMethod === 'phone'}
-              onChange={(e) => onDeliveryMethodChange(e.target.value as 'email' | 'phone')}
+              value="sms"
+              checked={deliveryMethod === 'sms'}
+              onChange={(e) => onDeliveryMethodChange(e.target.value as 'email' | 'sms')}
               className="w-5 h-5 text-primary-600 focus:ring-primary-500 focus:ring-2 border-gray-300"
             />
             <span className="ml-3 text-slate-700 font-medium group-hover:text-slate-900">
@@ -58,8 +57,10 @@ export default function ContactForm({ deliveryMethod, onDeliveryMethodChange }: 
             <input
               type="email"
               id="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              value={destination}
+              onChange={(e) => {
+                setDestination(e.target.value)
+              }}
               placeholder="you@example.com"
               className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition-all"
             />
@@ -67,19 +68,23 @@ export default function ContactForm({ deliveryMethod, onDeliveryMethodChange }: 
         )}
 
         {/* Phone Input */}
-        {deliveryMethod === 'phone' && (
+        {deliveryMethod === 'sms' && (
           <div className="animate-in fade-in slide-in-from-top-2 duration-200">
             <label htmlFor="phone" className="block text-sm font-medium text-slate-700 mb-2">
               Phone Number
             </label>
             <input
-              type="tel"
-              id="phone"
-              value={phone}
-              onChange={(e) => setPhone(e.target.value)}
+              type="sms"
+              id="sms"
+              value={destination}
+              onChange={(e) => {
+                setDestination(e.target.value);
+              }
+                
+              }
               placeholder="+61 4XX XXX XXX"
               className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition-all"
-            />
+            />  
           </div>
         )}
       </div>
