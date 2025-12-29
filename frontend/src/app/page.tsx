@@ -11,6 +11,15 @@ export default function Home() {
   const [destination, setDestination] = useState('')
   const [selectedSource, setSelectedSource] = useState<string | null>(null)
 
+  // checks if it is possile to subscribe
+  const canSubscribe = () => {
+    c
+  }
+
+  // check is sms/email already exists in db
+  const isInDatabase= () => {
+  }
+
   const handleSubscribe = () => {
     console.log({ deliveryMethod, destination, selectedSource })
   }
