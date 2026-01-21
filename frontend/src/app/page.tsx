@@ -16,8 +16,8 @@ export default function Home() {
     c
   }
 
-  // check is sms/email already exists in db
-  const isInDatabase= () => {
+  // check if sms/email already exists in db
+  const existsDatabase = () => {
   }
 
   const handleSubscribe = () => {
