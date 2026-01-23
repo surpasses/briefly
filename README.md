@@ -33,4 +33,13 @@ npm run db:seed
 npm run db:down
 ```
 
+Backend Setup
+```bash
+# Install dependencies
+cd frontend
+npm install
+
+# Run development server
+npm run dev
+```
 Open [http://localhost:3000](http://localhost:3000) in your browser.
