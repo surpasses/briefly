@@ -1,10 +1,19 @@
 import { Router } from "express";
+import pool from "../db/pool";
 const router = Router();
 
 // Adds a new user to the database
 // Default is_active and is_verified is off before verification
 router.post("/user/add", (req, res) => {
-    return res.status(400).json({ error: "stub" });
+    try {
+        res.status(200).json({
+        status: "ok",
+    });
+  } catch (err) {
+        res.status(503).json({
+        status: "degraded",
+    });
+  }
 });
 
 // Removes a user from the database

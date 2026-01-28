@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import ArticleChecklist from '@/components/ArticleChecklist'
 import ContactForm from '@/components/ContactForm'
+import { normalise } from '@/utils/validation'
 
 type DeliveryMethod = 'email' | 'sms'
 
@@ -13,16 +14,43 @@ export default function Home() {
 
   // checks if it is possile to subscribe
   const canSubscribe = () => {
-    c
   }
 
   // check if sms/email already exists in db
   const existsDatabase = () => {
   }
 
-  const handleSubscribe = () => {
-    console.log({ deliveryMethod, destination, selectedSource })
+  const addUser = async () => {
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+    console.log(`${apiUrl}/api/user/add`)
+    console.log({ deliveryMethod, destination, selectedSource });
+
+    const res = await fetch(`${apiUrl}/api/user/add`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        deliveryMethod,
+        destination,
+        selectedSource,
+      }),
+    });
+
+    const data = await res.json();
+
+    if (!res.ok) {
+      console.error("User not added:", data);
+      return;
+    }
+
+    console.log("User added:", data);
   }
+
+  const handleSubscribe = async () => {
+    const normDest = normalise(destination, deliveryMethod)
+  };
+
 
   return (
     <main className="min-h-screen py-12 px-4 sm:px-6 lg:px-8">
