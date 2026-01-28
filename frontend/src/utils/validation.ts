@@ -7,10 +7,20 @@ export function normalise(destination: string, deliveryMethod: String): string {
     return destination.trim().toLowerCase();
 }
 
-export function isValid(destination: string, deliveryMethod: String): boolean {
-    if (deliveryMethod === "sms") {
-        if (/^\+61\d{9}$/.test(destination)) return true;
-        if (/^\+?\d{9,15}$/.test(destination)) return true;
-    }
-  
-    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(destination);}
+// checks if sms/email is in a valid format
+export function isValid(destination: string, deliveryMethod: string): boolean {
+  const patterns: RegExp[] = [];
+
+  if (deliveryMethod === "sms") {
+    patterns.push(
+      /^\+61\d{9}$/,
+      /^\+?\d{9,15}$/
+    );
+  } else {
+    patterns.push(
+      /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    );
+  }
+
+  return patterns.some((pattern) => pattern.test(destination));
+}

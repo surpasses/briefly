@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import ArticleChecklist from '@/components/ArticleChecklist'
 import ContactForm from '@/components/ContactForm'
-import { normalise } from '@/utils/validation'
+import { isValid, normalise } from '@/utils/validation'
 
 type DeliveryMethod = 'email' | 'sms'
 
@@ -47,8 +47,23 @@ export default function Home() {
     console.log("User added:", data);
   }
 
+  // normalises value whenever there are changes
+  function handleDestinationChange(value: string) {
+    const normalised = normalise(value, deliveryMethod)
+    setDestination(normalised)
+  }
+
   const handleSubscribe = async () => {
-    const normDest = normalise(destination, deliveryMethod)
+    const validBool = isValid(destination, deliveryMethod)
+
+    if (!validBool) {
+      if (deliveryMethod === "email") {
+        alert("Please enter a valid email address in the highlighted form");
+        return;
+      } 
+      alert("Please enter a valid SMS in the highlighted form");
+      return;
+    }
   };
 
 
@@ -67,7 +82,7 @@ export default function Home() {
             deliveryMethod={deliveryMethod}
             onDeliveryMethodChange={setDeliveryMethod}
             destination={destination}
-            onDestinationChange={setDestination}
+            onDestinationChange={handleDestinationChange}
           />
 
           <ArticleChecklist
