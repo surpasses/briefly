@@ -4,6 +4,7 @@ import { useState } from 'react'
 import ArticleChecklist from '@/components/ArticleChecklist'
 import ContactForm from '@/components/ContactForm'
 import { isValid, normalise } from '@/utils/validation'
+import ResponseDialog from '@/components/ResponseDialog'
 
 type DeliveryMethod = 'email' | 'sms'
 
@@ -12,39 +13,41 @@ export default function Home() {
   const [destination, setDestination] = useState('')
   const [selectedSource, setSelectedSource] = useState<string | null>(null)
 
+  const [dialogOpen, setDialogOpen] = useState(false)
+  const [dialogMessage, setDialogMessage] = useState('')
+  const [dialogSuccess, setDialogSuccess] = useState(false)
+
   // checks if it is possile to subscribe
   const canSubscribe = () => {
   }
 
-  // check if sms/email already exists in db
-  const existsDatabase = () => {
-  }
-
   const addUser = async () => {
     const apiUrl = process.env.NEXT_PUBLIC_API_URL;
-    console.log(`${apiUrl}/api/user/add`)
-    console.log({ deliveryMethod, destination, selectedSource });
+    let data: any = null;
+    try {
 
-    const res = await fetch(`${apiUrl}/api/user/add`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        deliveryMethod,
-        destination,
-        selectedSource,
-      }),
-    });
+        const res = await fetch(`${apiUrl}/api/user/add`, { 
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          deliveryMethod,
+          destination,
+          selectedSource,
+        }),
+      });
 
-    const data = await res.json();
-
-    if (!res.ok) {
-      console.error("User not added:", data);
-      return;
+      const data = await res.json();
+      setDialogSuccess(res.ok)
+      setDialogMessage(data.status || 'Error')
+      setDialogOpen(true)
+    }   catch {
+      setDialogSuccess(false)
+      setDialogMessage(data.status || 'Network error. Please try again.')
+      setDialogOpen(true)
     }
 
-    console.log("User added:", data);
   }
 
   // normalises value whenever there are changes
@@ -64,6 +67,8 @@ export default function Home() {
       alert("Please enter a valid SMS in the highlighted form");
       return;
     }
+
+    addUser()
   };
 
 
@@ -95,6 +100,13 @@ export default function Home() {
         <div className="mt-8 text-center text-sm text-slate-500">
           <p>Select your preferred delivery method and news sources to receive daily summaries at 8 am.</p>
         </div>
+
+        <ResponseDialog
+        open={dialogOpen}
+        success={dialogSuccess}
+        message={dialogMessage}
+        onClose={() => setDialogOpen(false)}
+      />
       </div>
     </main>
   )

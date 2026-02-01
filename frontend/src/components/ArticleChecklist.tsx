@@ -92,6 +92,7 @@ export default function ArticleChecklist({
       {selectedSource && (
         <div className="mt-6 pt-6 border-t border-slate-200">
           <button 
+            type='button'
             className="w-full bg-primary-600 hover:bg-primary-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors shadow-md hover:shadow-lg"
             onClick={onSubscribe}
           >
